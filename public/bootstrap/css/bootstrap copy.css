@@ -2337,7 +2337,7 @@ table th[class*="col-"] {
   display: table-cell;
   float: none;
 }
-
+/*
 .table > thead > tr > td.active,
 .table > tbody > tr > td.active,
 .table > tfoot > tr > td.active,
@@ -5006,15 +5006,6 @@ a.badge:focus {
 }
 .nav-pills > li > a > .badge {
   margin-left: 3px;
-}
-
-.jumbotron {
-    position: relative;
-    background: #000 url("../../images/music.jpg") center center;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    overflow: hidden;
 }
 .jumbotron {
   padding-top: 30px;
