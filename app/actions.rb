@@ -1,19 +1,20 @@
 # Homepage (Root path)
 get '/' do
-  erb :index
+  erb :'index'
 end
 
 get '/create' do
-  erb :create
+  erb :'create'
 end
 
 get '/view' do
-  erb :view
+  @track = Track.all
+  erb :'view'
 end
 
 get '/error' do
   @track = Track.all
-  erb :error
+  erb :'error'
 end
 
 post '/new' do
@@ -23,8 +24,8 @@ post '/new' do
     url: params[:url]
   )
   if @track.save
-    erb :success 
+    erb :'success' 
   else
-    erb :error
+    erb :'error'
   end
 end

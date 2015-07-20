@@ -1,1 +1,15 @@
 <h1>View Page</h1>
+
+<% @track.each do |track| %>
+  <div>
+    <p>
+      Song: <%= track.song_title %>
+    </p>
+    <p>
+      Author: <%= track.author %>
+    </p>
+    <p>
+      Url: <%= track.url %>
+    </p>
+  </div>
+<% end %>
