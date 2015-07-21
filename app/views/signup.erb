@@ -1,0 +1,32 @@
+<h1>Sign Up</h1>
+
+<% if @user && @user.errors.any? %>
+  <div>
+    <strong>Some issues with your message, please fix them:</strong>
+    <ul>
+      <% @user.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="col-xs-12 col-sm-6 col-md-8">
+  <form method= "post" action="/newuser">
+    <div class="form-group">
+      <label>Username</label>
+      <input class="form-control" type="text" name="user" placeholder="Username" value="<%= @user && @user.user %>"><br />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input class="form-control" type="password" name="password" placeholder="Password"><br />
+    </div>
+    <div class="form-group">
+      <label>Name</label>
+      <input class="form-control" type="text" name="name" placeholder="Name" value="<%= @user && @user.name %>"><br />
+    </div>
+    <div class="form-group">
+      <input class="btn btn-default" type="submit" value="Signup!">
+    </div>
+  </form>
+</div>

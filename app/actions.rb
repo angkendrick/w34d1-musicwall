@@ -3,6 +3,36 @@ get '/' do
   erb :'index'
 end
 
+get '/signup' do
+  erb :'signup'
+end
+
+post '/newuser' do
+  @user = User.new(
+    user: params[:user],
+    password: params[:password],
+    name: params[:name]
+  )
+  if @user.save
+    redirect :'view'
+  else
+    erb :'signup'
+  end
+end
+
+get '/login' do
+  erb :'login'
+end
+
+post '/authenticate' do
+  if User.authenticate(params[:user], params[:password])
+    redirect :'view'
+  else
+    @error = 'ldajdksajd'
+    erb :'login'
+  end
+end
+
 get '/create' do
   erb :'create'
 end
@@ -29,3 +59,5 @@ post '/new' do
     erb :'error'
   end
 end
+
+
