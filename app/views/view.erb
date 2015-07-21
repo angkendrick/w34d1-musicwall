@@ -1,8 +1,8 @@
-<h1 class="h1">View Page</h1>
-<div class="col-xs-12 col-sm-6 col-md-8">
+<h1 class="h1"><i class="fa fa-sliders"></i>Music Wall</h1>
+<div class="container">
+  <div class="jumbotron">
   
-  <table class="table table-hover table-striped table-bordered">
-   
+  <table class="table table-hover table-bordered"> 
    <% count = 0 %>
     <tr>
       <th>#</th><th>Song</th><th>Artist</th><th>Link</th><th>Vote</th><th>Total</th>
@@ -15,19 +15,19 @@
         <td><%= track.url %></td>
 
         <% if Vote.vote_check(track.id, session[:id]) %>
-          <td><input class="btn btn-success" type="submit" value="Up Vote" disabled="disabled"></td>
+          <td><input class="btn btn-primary" type="submit" value="Up Vote" disabled="disabled"></td>
         <% else %>
           <form method= "post" action="/upvote">
             <input type="hidden" name="user_id" value="<%= session[:id] %>">
             <input type="hidden" name="track_id" value="<%= track.id %>">
-            <td><input class="btn btn-success" type="submit" value="Up Vote"></td>
+            <td><input class="btn btn-primary" type="submit" value="Up Vote"></td>
           </form>
         <% end %>
 
         <td><%= Vote.count_votes(track.id) %></td>
 
       </tr>
-    <% end %>
-    
+    <% end %>  
   </table>
+  </div>
 </div>
