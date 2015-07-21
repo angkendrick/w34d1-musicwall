@@ -12,4 +12,13 @@ class Vote < ActiveRecord::Base
     end
   end
 
+  def self.vote_check(track_id, user_id)
+    if track_id && user_id
+      track_id.to_i
+      user_id.to_i
+      container = self.where(track_id: track_id).where(user_id: user_id)
+      container.count == 0 ? false : true
+    end
+  end
+
 end
