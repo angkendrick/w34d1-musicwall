@@ -24,26 +24,40 @@ get '/login' do
   erb :'login'
 end
 
+get '/logout' do
+  session[:name] = nil
+  erb :'index'
+end
+
 post '/authenticate' do
   if User.authenticate(params[:user], params[:password])
+    session[:name] = "Logout" #User.getname(params[:user])
     redirect :'view'
   else
-    @error = 'ldajdksajd'
+    @error = 'error'
     erb :'login'
   end
 end
 
 get '/create' do
-  erb :'create'
+  if session[:name]
+    erb :'create'
+  else
+    erb :'index'
+  end
 end
 
 get '/view' do
-  @track = Track.all
-  erb :'view'
+  if session[:name]
+    @track = Track.all
+    erb :'view'
+  else
+    erb :'index'
+  end
 end
 
 get '/error' do
-  @track = Track.all
+  @track = Track.all #failed to write to db
   erb :'error'
 end
 

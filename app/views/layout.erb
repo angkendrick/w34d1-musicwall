@@ -21,8 +21,13 @@
 
   <nav class="navbar navbar-inverse">
     <a href="/" class="btn btn-primary btn-lg active" role="button">Main</a>
-    <a href="/create" class="btn btn-primary btn-lg active" role="button">Create</a>
-    <a href="/view" class="btn btn-primary btn-lg active" role="button">View</a>
+    <% if session[:name] %>
+      <a href="/create" class="btn btn-primary btn-lg active" role="button">Create</a>
+      <a href="/view" class="btn btn-primary btn-lg active" role="button">View</a>
+      <a href="/logout" class="btn btn-default btn-lg pull-right" role="button"><%= session[:name]%></a>
+    <% else %>
+      <a href="/login" class="btn btn-default btn-lg pull-right" role="button">Sign-In</a>
+    <% end %>
   </nav>
 
   <%= yield %>
