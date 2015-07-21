@@ -5,7 +5,7 @@
    
    <% count = 0 %>
     <tr>
-      <th>#</th><th>Song</th><th>Artist</th><th>Link</th>
+      <th>#</th><th>Song</th><th>Artist</th><th>Link</th><th>Vote</th><th>Total</th>
     </tr>
     <% @track.each do |track| %> 
       <tr>
@@ -13,6 +13,15 @@
         <td><%= track.song_title %></td>
         <td><%= track.author %></td>
         <td><%= track.url %></td>
+
+        <form method= "post" action="/upvote">
+          <input type="hidden" name="user_id" value="<%= session[:id] %>">
+          <input type="hidden" name="track_id" value="<%= track.id %>">
+          <td><input class="btn btn-success" type="submit" value="Up Vote"></td>
+        </form>
+
+        <td><%= Vote.count_votes(track.id) %></td>
+
       </tr>
     <% end %>
     

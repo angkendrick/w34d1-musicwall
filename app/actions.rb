@@ -29,16 +29,6 @@ get '/logout' do
   erb :'index'
 end
 
-post '/authenticate' do
-  if User.authenticate(params[:user], params[:password])
-    session[:id] = User.getname(params[:user])
-    redirect :'view'
-  else
-    @error = 'error'
-    erb :'login'
-  end
-end
-
 get '/create' do
   if session[:id]
     erb :'create'
@@ -50,6 +40,7 @@ end
 get '/view' do
   if session[:id]
     @track = Track.all
+    @vote = Vote.all
     erb :'view'
   else
     erb :'index'
@@ -61,6 +52,16 @@ get '/error' do
   erb :'error'
 end
 
+post '/authenticate' do
+  if User.authenticate(params[:user], params[:password])
+    session[:id] = User.getname(params[:user])
+    redirect :'view'
+  else
+    @error = 'error'
+    erb :'login'
+  end
+end
+
 post '/new' do
   @track = Track.new(
     song_title: params[:song_title],
@@ -70,6 +71,20 @@ post '/new' do
   )
   if @track.save
     erb :'success' 
+  else
+    erb :'error'
+  end
+end
+
+post '/upvote' do
+  @vote = Vote.new(
+    track_id: params[:track_id],
+    user_id: params[:user_id]
+  )
+  if @vote.save
+    @track = Track.all
+    @vote = Vote.all
+    erb :'view'
   else
     erb :'error'
   end
