@@ -3,8 +3,12 @@
   <h1>Music Wall</h1>
   <p>...</p>
   <p>
-    <a class="btn btn-primary btn-lg" href="/signup" role="button">Sign Up</a>
-    <a class="btn btn-primary btn-lg" href="/login" role="button">Sign In</a>
+    <% if session[:id] %>
+      <a class="btn btn-primary btn-lg" href="/logout" role="button">Logout</a>
+    <% else %>
+      <a class="btn btn-primary btn-lg" href="/signup" role="button">Sign Up</a>
+      <a class="btn btn-primary btn-lg" href="/login" role="button">Sign In</a>
+    <% end %>
   </p>
 </div>
 </div>

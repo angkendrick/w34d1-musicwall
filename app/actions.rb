@@ -25,13 +25,13 @@ get '/login' do
 end
 
 get '/logout' do
-  session[:name] = nil
+  session[:id] = nil
   erb :'index'
 end
 
 post '/authenticate' do
   if User.authenticate(params[:user], params[:password])
-    session[:name] = "Logout" #User.getname(params[:user])
+    session[:id] = User.getname(params[:user])
     redirect :'view'
   else
     @error = 'error'
@@ -40,7 +40,7 @@ post '/authenticate' do
 end
 
 get '/create' do
-  if session[:name]
+  if session[:id]
     erb :'create'
   else
     erb :'index'
@@ -48,7 +48,7 @@ get '/create' do
 end
 
 get '/view' do
-  if session[:name]
+  if session[:id]
     @track = Track.all
     erb :'view'
   else
@@ -65,7 +65,8 @@ post '/new' do
   @track = Track.new(
     song_title: params[:song_title],
     author: params[:author],
-    url: params[:url]
+    url: params[:url],
+    user_id: session[:id]
   )
   if @track.save
     erb :'success' 

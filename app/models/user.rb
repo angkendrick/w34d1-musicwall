@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+
+  has_many :tracks
+  has_many :votes
+
   validates :user, presence: true, uniqueness: true
   validates :password, presence: true
   validates :name, presence: true
@@ -15,7 +19,7 @@ class User < ActiveRecord::Base
   def self.getname(user)
     user = self.find_by(user: user)
     if user
-      user.name
+      user.id
     else
       false
     end
